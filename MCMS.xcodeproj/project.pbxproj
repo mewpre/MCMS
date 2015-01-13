@@ -14,6 +14,7 @@
 		6009515D1A65CED0001FA4C1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6009515C1A65CED0001FA4C1 /* Images.xcassets */; };
 		600951601A65CED0001FA4C1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6009515E1A65CED0001FA4C1 /* LaunchScreen.xib */; };
 		6009516C1A65CED0001FA4C1 /* MCMSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6009516B1A65CED0001FA4C1 /* MCMSTests.m */; };
+		600951771A65CF9F001FA4C1 /* MagicalCreature.m in Sources */ = {isa = PBXBuildFile; fileRef = 600951761A65CF9F001FA4C1 /* MagicalCreature.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		600951651A65CED0001FA4C1 /* MCMSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MCMSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6009516A1A65CED0001FA4C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6009516B1A65CED0001FA4C1 /* MCMSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MCMSTests.m; sourceTree = "<group>"; };
+		600951751A65CF9F001FA4C1 /* MagicalCreature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MagicalCreature.h; path = ../MagicalCreature.h; sourceTree = "<group>"; };
+		600951761A65CF9F001FA4C1 /* MagicalCreature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MagicalCreature.m; path = ../MagicalCreature.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +85,8 @@
 			isa = PBXGroup;
 			children = (
 				600951531A65CED0001FA4C1 /* AppDelegate.h */,
+				600951751A65CF9F001FA4C1 /* MagicalCreature.h */,
+				600951761A65CF9F001FA4C1 /* MagicalCreature.m */,
 				600951541A65CED0001FA4C1 /* AppDelegate.m */,
 				600951561A65CED0001FA4C1 /* ViewController.h */,
 				600951571A65CED0001FA4C1 /* ViewController.m */,
@@ -220,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				600951581A65CED0001FA4C1 /* ViewController.m in Sources */,
+				600951771A65CF9F001FA4C1 /* MagicalCreature.m in Sources */,
 				600951551A65CED0001FA4C1 /* AppDelegate.m in Sources */,
 				600951521A65CED0001FA4C1 /* main.m in Sources */,
 			);

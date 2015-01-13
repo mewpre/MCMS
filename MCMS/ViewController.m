@@ -7,8 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "MagicalCreature.h"
 
-@interface ViewController ()
+@interface ViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet UITableView *listTableView;
+@property (strong, nonatomic) IBOutlet UITextField *creatureNameTextField;
+@property (strong, nonatomic) IBOutlet UITextField *creatureDetailTextField;
 
 @end
 
@@ -16,12 +20,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    NSMutableArray *creatureAccessories = [NSMutableArray arrayWithObjects:@"Spoon", @"Cheese", @"Gold", @"Rubber Duck",  nil];
+    UIImage *creatureImage = [UIImage imageNamed:@"trogdor"];
+    MagicalCreature *unicorn = [[MagicalCreature alloc]initWithName:@"unicorn" description:@"magical horse with horn" accessories:creatureAccessories image:creatureImage];
+    MagicalCreature *griffin = [[MagicalCreature alloc]initWithName:@"griffin" description:@"half eagle half lion" accessories:creatureAccessories image:creatureImage];
+    MagicalCreature *dragon = [[MagicalCreature alloc]initWithName:@"dragon" description: @"giant fire-breathing lizard" accessories:creatureAccessories image:creatureImage];
+    self.creatures = [NSMutableArray arrayWithObjects:unicorn, griffin, dragon, nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [self.listTableView dequeueReusableCellWithIdentifier:@"creatureCellID"];
+    MagicalCreature *selectedMagicalCreature = [self.creatures objectAtIndex:indexPath.row];
+    cell.textLabel.text = [selectedMagicalCreature getCreatureName];
+    return cell;
+
 }
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.creatures.count;
+}
+
+- (IBAction)addButtonTapped:(UIButton *)sender
+{
+    NSMutableArray *creatureAccessories = [NSMutableArray arrayWithObjects:@"Spoon", @"Cheese", @"Gold", @"Rubber Duck",  nil];
+    UIImage *creatureImage = [UIImage imageNamed:@"trogdor"];
+    MagicalCreature *newCreature = [[MagicalCreature alloc]initWithName:self.creatureNameTextField.text description:self.creatureDetailTextField.text accessories:creatureAccessories image:creatureImage];
+    [self.creatures addObject:newCreature];
+    self.creatureNameTextField.text = @"";
+    self.creatureDetailTextField.text = @"";
+    [self.listTableView reloadData];
+}
 @end
