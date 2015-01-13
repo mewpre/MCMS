@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "MagicalCreature.h"
+#import "CreatureViewController.h"
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *listTableView;
@@ -22,9 +23,9 @@
     [super viewDidLoad];
     NSMutableArray *creatureAccessories = [NSMutableArray arrayWithObjects:@"Spoon", @"Cheese", @"Gold", @"Rubber Duck",  nil];
     UIImage *creatureImage = [UIImage imageNamed:@"trogdor"];
-    MagicalCreature *unicorn = [[MagicalCreature alloc]initWithName:@"unicorn" description:@"magical horse with horn" accessories:creatureAccessories image:creatureImage];
-    MagicalCreature *griffin = [[MagicalCreature alloc]initWithName:@"griffin" description:@"half eagle half lion" accessories:creatureAccessories image:creatureImage];
-    MagicalCreature *dragon = [[MagicalCreature alloc]initWithName:@"dragon" description: @"giant fire-breathing lizard" accessories:creatureAccessories image:creatureImage];
+    MagicalCreature *unicorn = [[MagicalCreature alloc]initWithName:@"unicorn" detail:@"magical horse with horn" accessories:creatureAccessories image:creatureImage];
+    MagicalCreature *griffin = [[MagicalCreature alloc]initWithName:@"griffin" detail:@"half eagle half lion" accessories:creatureAccessories image:creatureImage];
+    MagicalCreature *dragon = [[MagicalCreature alloc]initWithName:@"dragon" detail: @"giant fire-breathing lizard" accessories:creatureAccessories image:creatureImage];
     self.creatures = [NSMutableArray arrayWithObjects:unicorn, griffin, dragon, nil];
 }
 
@@ -46,10 +47,19 @@
 {
     NSMutableArray *creatureAccessories = [NSMutableArray arrayWithObjects:@"Spoon", @"Cheese", @"Gold", @"Rubber Duck",  nil];
     UIImage *creatureImage = [UIImage imageNamed:@"trogdor"];
-    MagicalCreature *newCreature = [[MagicalCreature alloc]initWithName:self.creatureNameTextField.text description:self.creatureDetailTextField.text accessories:creatureAccessories image:creatureImage];
+    MagicalCreature *newCreature = [[MagicalCreature alloc]initWithName:self.creatureNameTextField.text detail:self.creatureDetailTextField.text accessories:creatureAccessories image:creatureImage];
     [self.creatures addObject:newCreature];
     self.creatureNameTextField.text = @"";
     self.creatureDetailTextField.text = @"";
     [self.listTableView reloadData];
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell *)cell
+{
+    CreatureViewController *cvc = segue.destinationViewController;
+    // Find the index path from the selected table view cell
+    // and use that to find the index of the creature in the creature array
+    cvc.magicalCreature = [self.creatures objectAtIndex:[[self.listTableView indexPathForCell:cell] row]];
+}
+
 @end

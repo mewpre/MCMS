@@ -11,7 +11,10 @@
 
 @interface MagicalCreature : NSObject
 
--(instancetype)initWithName: (NSString *)name description:(NSString *) description accessories: (NSMutableArray *)accessories image: (UIImage *)image;
+-(instancetype)initWithName: (NSString *)name detail:(NSString *) description accessories: (NSMutableArray *)accessories image: (UIImage *)image;
 -(NSString *)getCreatureName;
+-(NSString *)getCreatureDetail;
+-(void)setCreatureName: (NSString *)name;
+-(void)setCreatureDetail: (NSString *)detail;
 
 @end

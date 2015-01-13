@@ -11,20 +11,21 @@
 @interface MagicalCreature ()
 
 @property NSString *name;
-@property NSString *creatureDescription;
+@property NSString *detail;
 @property NSMutableArray *accessories;
+@property UIImage *image;
 
 @end
 
 @implementation MagicalCreature
 
--(instancetype)initWithName: (NSString *)name description:(NSString *) description accessories: (NSMutableArray *)accessories image: (UIImage *)image
+-(instancetype)initWithName: (NSString *)name detail:(NSString *) detail accessories: (NSMutableArray *)accessories image: (UIImage *)image
 {
     self = [super init];
     if (self)
     {
         self.name = name;
-        self.creatureDescription = description;
+        self.detail = detail;
     }
     return self;
 }
@@ -33,5 +34,21 @@
 {
     return self.name;
 }
+
+-(NSString *)getCreatureDetail
+{
+    return self.detail;
+}
+
+-(void)setCreatureName: (NSString *)name
+{
+    self.name = name;
+}
+
+-(void)setCreatureDetail: (NSString *)detail
+{
+    self.detail = detail;
+}
+
 
 @end
