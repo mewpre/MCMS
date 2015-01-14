@@ -44,7 +44,8 @@
     {
         sender.title = @"Done";
     }
-    else
+    //Executes only if both editCreatureNameTextField and editCreatureDetailTextField are not empty
+    else if (!([self.editCreatureNameTextField isEqual:@""] || [self.editCreatureDetailTextField isEqual:@""]))
     {
         sender.title = @"Edit";
         NSString *newName = self.editCreatureNameTextField.text;
@@ -67,8 +68,7 @@
     return [[self.magicalCreature getCreatureAccessories] count];
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView
-        cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.accessoriesTableView dequeueReusableCellWithIdentifier:@"accessoryCellID"];
     CreatureAccessory *accessoryAtCell = [[self.magicalCreature getCreatureAccessories] objectAtIndex:indexPath.row];
