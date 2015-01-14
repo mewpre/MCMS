@@ -145,7 +145,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="accesoriesTableView" destination="GgI-2Y-SAX" id="KBZ-IE-6Fi"/>
+                        <outlet property="accessoriesTableView" destination="GgI-2Y-SAX" id="eTa-Tb-93x"/>
                         <outlet property="creatureDetailLabel" destination="iJW-m9-gp0" id="vaj-LV-99K"/>
                         <outlet property="creatureImageView" destination="bjq-XL-vdI" id="ChW-5A-hBO"/>
                         <outlet property="creatureNameLabel" destination="LL9-Hn-UIH" id="fKU-1s-6Bh"/>

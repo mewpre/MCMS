@@ -12,6 +12,9 @@
 
 -(NSString *)getCreatureAccessoryName;
 -(int)getCreatureAccessoryDamageCount;
+-(BOOL)isCreatureAccessoryEquipped;
+
+-(void)toggleCreatureAccessoryEquipStatus;
 -(instancetype) initWithCreatureName:(NSString *)creatureName damageCount:(int)damageCount;
 
 

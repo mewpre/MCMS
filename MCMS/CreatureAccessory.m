@@ -12,6 +12,7 @@
 
 @property NSString *name;
 @property int damageCount;
+@property BOOL isEquipped;
 
 @end
 
@@ -27,13 +28,25 @@
     return self.damageCount;
 }
 
--(instancetype) initWithCreatureName:(NSString *)creatureName damageCount:(int)damageCount
+-(BOOL)isCreatureAccessoryEquipped
+{
+    return self.isEquipped;
+}
+
+-(void)toggleCreatureAccessoryEquipStatus
+{
+    self.isEquipped = !self.isEquipped;
+}
+
+-(instancetype) initWithCreatureName:(NSString *)creatureName
+                         damageCount:(int)damageCount
 {
     self = [super init];
     if (self)
     {
         self.name = creatureName;
         self.damageCount = damageCount;
+        self.isEquipped = NO;
     }
     return self;
 }

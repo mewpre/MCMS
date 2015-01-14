@@ -7,6 +7,7 @@
 //
 
 #import "CreatureViewController.h"
+#import "CreatureAccessory.h"
 
 @interface CreatureViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *creatureNameLabel;
@@ -14,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *editCreatureNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *editCreatureDetailTextField;
 @property (strong, nonatomic) IBOutlet UIImageView *creatureImageView;
-@property (strong, nonatomic) IBOutlet UITableView *accesoriesTableView;
+@property (strong, nonatomic) IBOutlet UITableView *accessoriesTableView;
 @property BOOL inEditMode;
 
 @end
@@ -65,9 +66,27 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [self.accesoriesTableView dequeueReusableCellWithIdentifier:@"accessoryCellID"];
-    cell.textLabel.text = [[[self.magicalCreature getCreatureAccessories] objectAtIndex:indexPath.row] name];
+    UITableViewCell *cell = [self.accessoriesTableView dequeueReusableCellWithIdentifier:@"accessoryCellID"];
+    CreatureAccessory *accessoryAtCell = [[self.magicalCreature getCreatureAccessories] objectAtIndex:indexPath.row];
+    cell.textLabel.text = [accessoryAtCell getCreatureAccessoryName];
+    if ([accessoryAtCell isCreatureAccessoryEquipped])
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     return cell;
 }
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CreatureAccessory *selectedAccessory = [[self.magicalCreature getCreatureAccessories] objectAtIndex:indexPath.row];
+    [selectedAccessory toggleCreatureAccessoryEquipStatus];
+    [self.accessoriesTableView reloadData];
+}
+
+
 
 @end

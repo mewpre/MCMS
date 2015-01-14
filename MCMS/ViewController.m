@@ -68,10 +68,10 @@
 }
 
 - (NSMutableArray *)createCreatureAccessories {
-    CreatureAccessory *firstAccessory = [[CreatureAccessory alloc] initWithCreatureName:@"Spoon" damageCount:40];
+    CreatureAccessory *firstAccessory = [[CreatureAccessory alloc] initWithCreatureName:@"Spoon" damageCount:40 ];
+    CreatureAccessory *secondAccessory = [[CreatureAccessory alloc] initWithCreatureName:@"Cheese" damageCount:5];
     CreatureAccessory *thirdAccessory = [[CreatureAccessory alloc] initWithCreatureName:@"Gold" damageCount:67];
     CreatureAccessory *fourthAccessory = [[CreatureAccessory alloc] initWithCreatureName:@"Rubber Duck" damageCount:18];
-    CreatureAccessory *secondAccessory = [[CreatureAccessory alloc] initWithCreatureName:@"Cheese" damageCount:5];
 
     NSMutableArray *creatureAccessories = [NSMutableArray arrayWithObjects:firstAccessory, secondAccessory, thirdAccessory, fourthAccessory, nil];
     return creatureAccessories;
