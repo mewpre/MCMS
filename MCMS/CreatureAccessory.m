@@ -38,13 +38,13 @@
     self.isEquipped = !self.isEquipped;
 }
 
--(instancetype) initWithCreatureName:(NSString *)creatureName
+-(instancetype) initWithAccessoryName:(NSString *)accessoryName
                          damageCount:(int)damageCount
 {
     self = [super init];
     if (self)
     {
-        self.name = creatureName;
+        self.name = accessoryName;
         self.damageCount = damageCount;
         self.isEquipped = NO;
     }
