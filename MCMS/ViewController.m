@@ -22,10 +22,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSMutableArray *creatureAccessories = [NSMutableArray arrayWithObjects:@"Spoon", @"Cheese", @"Gold", @"Rubber Duck",  nil];
-    UIImage *creatureImage = [UIImage imageNamed:@"trogdor"];
-    MagicalCreature *unicorn = [[MagicalCreature alloc]initWithName:@"unicorn" detail:@"magical horse with horn" accessories:creatureAccessories image:creatureImage];
-    MagicalCreature *griffin = [[MagicalCreature alloc]initWithName:@"griffin" detail:@"half eagle half lion" accessories:creatureAccessories image:creatureImage];
-    MagicalCreature *dragon = [[MagicalCreature alloc]initWithName:@"dragon" detail: @"giant fire-breathing lizard" accessories:creatureAccessories image:creatureImage];
+    UIImage *unicornImage = [UIImage imageNamed:@"unicorn"];
+    UIImage *griffinImage = [UIImage imageNamed:@"griffin"];
+    UIImage *dragonImage = [UIImage imageNamed:@"dragon"];
+    MagicalCreature *unicorn = [[MagicalCreature alloc]initWithName:@"unicorn" detail:@"magical horse with horn" accessories:creatureAccessories image:unicornImage];
+    MagicalCreature *griffin = [[MagicalCreature alloc]initWithName:@"griffin" detail:@"half eagle half lion" accessories:creatureAccessories image:griffinImage];
+    MagicalCreature *dragon = [[MagicalCreature alloc]initWithName:@"dragon" detail: @"giant fire-breathing lizard" accessories:creatureAccessories image:dragonImage];
     self.creatures = [NSMutableArray arrayWithObjects:unicorn, griffin, dragon, nil];
 }
 
@@ -46,7 +48,7 @@
 - (IBAction)addButtonTapped:(UIButton *)sender
 {
     NSMutableArray *creatureAccessories = [NSMutableArray arrayWithObjects:@"Spoon", @"Cheese", @"Gold", @"Rubber Duck",  nil];
-    UIImage *creatureImage = [UIImage imageNamed:@"trogdor"];
+    UIImage *creatureImage = [UIImage imageNamed:@"question"];
     MagicalCreature *newCreature = [[MagicalCreature alloc]initWithName:self.creatureNameTextField.text detail:self.creatureDetailTextField.text accessories:creatureAccessories image:creatureImage];
     [self.creatures addObject:newCreature];
     self.creatureNameTextField.text = @"";

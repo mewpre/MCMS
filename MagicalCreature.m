@@ -26,6 +26,8 @@
     {
         self.name = name;
         self.detail = detail;
+        self.image = image;
+        self.accessories = accessories;
     }
     return self;
 }
@@ -40,6 +42,16 @@
     return self.detail;
 }
 
+-(UIImage *)getCreatureImage
+{
+    return self.image;
+}
+
+-(NSMutableArray *)getCreatureAccessories
+{
+    return self.accessories;
+}
+
 -(void)setCreatureName: (NSString *)name
 {
     self.name = name;
@@ -49,6 +61,5 @@
 {
     self.detail = detail;
 }
-
 
 @end

@@ -8,11 +8,13 @@
 
 #import "CreatureViewController.h"
 
-@interface CreatureViewController ()
+@interface CreatureViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *creatureNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *creatureDetailLabel;
 @property (weak, nonatomic) IBOutlet UITextField *editCreatureNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *editCreatureDetailTextField;
+@property (strong, nonatomic) IBOutlet UIImageView *creatureImageView;
+@property (strong, nonatomic) IBOutlet UITableView *accesoriesTableView;
 @property BOOL inEditMode;
 
 @end
@@ -27,6 +29,7 @@
     self.editCreatureDetailTextField.hidden = YES;
     self.editCreatureNameTextField.hidden = YES;
 
+    self.creatureImageView.image = [self.magicalCreature getCreatureImage];
     self.creatureNameLabel.text = [self.magicalCreature getCreatureName];
     self.creatureDetailLabel.text = [self.magicalCreature getCreatureDetail];
 }
@@ -53,6 +56,18 @@
     self.editCreatureDetailTextField.hidden = self.inEditMode;
     self.editCreatureNameTextField.hidden = self.inEditMode;
     self.inEditMode = !self.inEditMode;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [[self.magicalCreature getCreatureAccessories] count];
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [self.accesoriesTableView dequeueReusableCellWithIdentifier:@"accessoryCellID"];
+    cell.textLabel.text = [[self.magicalCreature getCreatureAccessories] objectAtIndex:indexPath.row];
+    return cell;
 }
 
 @end
