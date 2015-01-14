@@ -10,11 +10,13 @@
 #import "MagicalCreature.h"
 #import "CreatureViewController.h"
 #import "CreatureAccessory.h"
+#import "BattleViewController.h"
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *listTableView;
 @property (strong, nonatomic) IBOutlet UITextField *creatureNameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *creatureDetailTextField;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *battleButton;
 
 @end
 
@@ -24,13 +26,15 @@
     [super viewDidLoad];
 
 
-    NSMutableArray *creatureAccessories = [self createCreatureAccessories];
+    NSMutableArray *creatureAccessories1 = [self createCreatureAccessories];
+    NSMutableArray *creatureAccessories2 = [self createCreatureAccessories];
+    NSMutableArray *creatureAccessories3 = [self createCreatureAccessories];
     UIImage *unicornImage = [UIImage imageNamed:@"unicorn"];
     UIImage *griffinImage = [UIImage imageNamed:@"griffin"];
     UIImage *dragonImage = [UIImage imageNamed:@"dragon"];
-    MagicalCreature *unicorn = [[MagicalCreature alloc]initWithName:@"unicorn" detail:@"magical horse with horn" accessories:creatureAccessories image:unicornImage];
-    MagicalCreature *griffin = [[MagicalCreature alloc]initWithName:@"griffin" detail:@"half eagle half lion" accessories:creatureAccessories image:griffinImage];
-    MagicalCreature *dragon = [[MagicalCreature alloc]initWithName:@"dragon" detail: @"giant fire-breathing lizard" accessories:creatureAccessories image:dragonImage];
+    MagicalCreature *unicorn = [[MagicalCreature alloc]initWithName:@"unicorn" detail:@"magical horse with horn" accessories:creatureAccessories1 image:unicornImage];
+    MagicalCreature *griffin = [[MagicalCreature alloc]initWithName:@"griffin" detail:@"half eagle half lion" accessories:creatureAccessories2 image:griffinImage];
+    MagicalCreature *dragon = [[MagicalCreature alloc]initWithName:@"dragon" detail: @"giant fire-breathing lizard" accessories:creatureAccessories3 image:dragonImage];
     self.creatures = [NSMutableArray arrayWithObjects:unicorn, griffin, dragon, nil];
 }
 
@@ -59,12 +63,23 @@
     [self.listTableView reloadData];
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell *)cell
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UIView *)sender
 {
-    CreatureViewController *cvc = segue.destinationViewController;
-    // Find the index path from the selected table view cell
-    // and use that to find the index of the creature in the creature array
-    cvc.magicalCreature = [self.creatures objectAtIndex:[[self.listTableView indexPathForCell:cell] row]];
+    // Battle button tag is 0
+    if (sender.tag == 0) {
+        BattleViewController *battleVC = [segue destinationViewController];
+        battleVC.magicalCreaturesArray = (NSArray *)self.creatures;
+    }
+    // Cell tag is 1
+    else if (sender.tag == 1)
+    {
+        UITableViewCell *cell = (UITableViewCell *)sender;
+
+        CreatureViewController *cvc = segue.destinationViewController;
+        // Find the index path from the selected table view cell
+        // and use that to find the index of the creature in the creature array
+        cvc.magicalCreature = [self.creatures objectAtIndex:[[self.listTableView indexPathForCell:cell] row]];
+    }
 }
 
 - (NSMutableArray *)createCreatureAccessories {
