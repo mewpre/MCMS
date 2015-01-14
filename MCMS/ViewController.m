@@ -16,7 +16,8 @@
 @property (strong, nonatomic) IBOutlet UITableView *listTableView;
 @property (strong, nonatomic) IBOutlet UITextField *creatureNameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *creatureDetailTextField;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *battleButton;
+@property (strong, nonatomic) IBOutlet UIButton *addButton;
+
 
 @end
 
@@ -25,17 +26,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    //Inserts the built-in clear button in the text field
+    self.creatureNameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.creatureDetailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
 
-    NSMutableArray *creatureAccessories1 = [self createCreatureAccessories];
-    NSMutableArray *creatureAccessories2 = [self createCreatureAccessories];
-    NSMutableArray *creatureAccessories3 = [self createCreatureAccessories];
-    UIImage *unicornImage = [UIImage imageNamed:@"unicorn"];
-    UIImage *griffinImage = [UIImage imageNamed:@"griffin"];
-    UIImage *dragonImage = [UIImage imageNamed:@"dragon"];
-    MagicalCreature *unicorn = [[MagicalCreature alloc]initWithName:@"unicorn" detail:@"magical horse with horn" accessories:creatureAccessories1 image:unicornImage];
-    MagicalCreature *griffin = [[MagicalCreature alloc]initWithName:@"griffin" detail:@"half eagle half lion" accessories:creatureAccessories2 image:griffinImage];
-    MagicalCreature *dragon = [[MagicalCreature alloc]initWithName:@"dragon" detail: @"giant fire-breathing lizard" accessories:creatureAccessories3 image:dragonImage];
-    self.creatures = [NSMutableArray arrayWithObjects:unicorn, griffin, dragon, nil];
+    [self initializeStartingCreatures];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -54,13 +49,24 @@
 
 - (IBAction)addButtonTapped:(UIButton *)sender
 {
-    NSMutableArray *creatureAccessories = [self createCreatureAccessories];
-    UIImage *creatureImage = [UIImage imageNamed:@"question"];
-    MagicalCreature *newCreature = [[MagicalCreature alloc]initWithName:self.creatureNameTextField.text detail:self.creatureDetailTextField.text accessories:creatureAccessories image:creatureImage];
-    [self.creatures addObject:newCreature];
-    self.creatureNameTextField.text = @"";
-    self.creatureDetailTextField.text = @"";
-    [self.listTableView reloadData];
+    //If the text fields aren't empty, create a new creature and put in in the table
+    if (!([self.creatureDetailTextField.text isEqual:@""] || [self.creatureNameTextField.text isEqual:@""]))
+    {
+        NSMutableArray *creatureAccessories = [self createCreatureAccessories];
+        UIImage *creatureImage = [UIImage imageNamed:@"question"];
+        MagicalCreature *newCreature = [[MagicalCreature alloc]initWithName:self.creatureNameTextField.text
+                                                                     detail:self.creatureDetailTextField.text
+                                                                accessories:creatureAccessories
+                                                                      image:creatureImage];
+        [self.creatures addObject:newCreature];
+        //Clears data
+
+        self.creatureNameTextField.text = @"";
+        self.creatureDetailTextField.text = @"";
+        [self.creatureNameTextField resignFirstResponder];
+        [self.creatureDetailTextField resignFirstResponder];
+        [self.listTableView reloadData];
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UIView *)sender
@@ -82,6 +88,7 @@
     }
 }
 
+#pragma mark - Initialization Helper Methods
 - (NSMutableArray *)createCreatureAccessories {
     CreatureAccessory *firstAccessory = [[CreatureAccessory alloc] initWithCreatureName:@"Spoon" damageCount:40 ];
     CreatureAccessory *secondAccessory = [[CreatureAccessory alloc] initWithCreatureName:@"Cheese" damageCount:5];
@@ -90,6 +97,28 @@
 
     NSMutableArray *creatureAccessories = [NSMutableArray arrayWithObjects:firstAccessory, secondAccessory, thirdAccessory, fourthAccessory, nil];
     return creatureAccessories;
+}
+
+- (void)initializeStartingCreatures {
+    NSMutableArray *creatureAccessories1 = [self createCreatureAccessories];
+    NSMutableArray *creatureAccessories2 = [self createCreatureAccessories];
+    NSMutableArray *creatureAccessories3 = [self createCreatureAccessories];
+    UIImage *unicornImage = [UIImage imageNamed:@"unicorn"];
+    UIImage *griffinImage = [UIImage imageNamed:@"griffin"];
+    UIImage *dragonImage = [UIImage imageNamed:@"dragon"];
+    MagicalCreature *unicorn = [[MagicalCreature alloc]initWithName:@"unicorn"
+                                                             detail:@"magical horse with horn"
+                                                        accessories:creatureAccessories1
+                                                              image:unicornImage];
+    MagicalCreature *griffin = [[MagicalCreature alloc]initWithName:@"griffin"
+                                                             detail:@"half eagle half lion"
+                                                        accessories:creatureAccessories2
+                                                              image:griffinImage];
+    MagicalCreature *dragon = [[MagicalCreature alloc]initWithName:@"dragon"
+                                                            detail: @"giant fire-breathing lizard"
+                                                       accessories:creatureAccessories3
+                                                             image:dragonImage];
+    self.creatures = [NSMutableArray arrayWithObjects:unicorn, griffin, dragon, nil];
 }
 
 @end

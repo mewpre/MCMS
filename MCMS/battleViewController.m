@@ -21,22 +21,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"%@", [self getWinners]);
-    self.winnerLabel.text = [NSString stringWithFormat:@"%@ is the Winner",
-                             [[[self getWinners] objectAtIndex:0] getCreatureName]];
-    self.winnerImage.image = [[[self getWinners] objectAtIndex:0] getCreatureImage];
-    self.secondPlaceLabel.text = [[[self getWinners] objectAtIndex:1] getCreatureName];
-    self.thirdPlaceLabel.text = [[[self getWinners] objectAtIndex:2] getCreatureName];
+
+    NSArray *winnersArray = [self getWinners];
+    self.winnerLabel.text = [NSString stringWithFormat:@"%@ is the winner!!",
+                             [[winnersArray objectAtIndex:0] getCreatureName]];
+    self.winnerImage.image = [[winnersArray objectAtIndex:0] getCreatureImage];
+    self.secondPlaceLabel.text = [[winnersArray objectAtIndex:1] getCreatureName];
+    self.thirdPlaceLabel.text = [[winnersArray objectAtIndex:2] getCreatureName];
 }
 
+/*  Adds up the damage dealt by each creature given the accessories and puts it in an array,
+    then finds the creatures that dealt the most damage and adds them to the winnerArray.
+    The creature and the sum are then removed to find the second place creature, and again to 
+    get the third place creature.
+*/
 - (NSArray *)getWinners
 {
     NSMutableArray *damageCountSumsArray = [[NSMutableArray alloc] init];
     NSMutableArray *winnersArray = [[NSMutableArray alloc] init];
     NSMutableArray *competitorsArray = [self.magicalCreaturesArray mutableCopy];
+    //Loops through creatures in magicalCreaturesArray
     for (MagicalCreature *creature in self.magicalCreaturesArray)
     {
         int sum = 0;
+        //Loops through array of creature accessories and adds the damage count of equipped accessories
         for (CreatureAccessory *creatureAccessory in [creature getCreatureAccessories])
         {
             if ([creatureAccessory isCreatureAccessoryEquipped])
@@ -46,6 +54,7 @@
         }
         [damageCountSumsArray addObject:[NSNumber numberWithInteger:sum]];
     }
+    //Loops to find the top 3 creatures
     for (int count = 0; count < 3; count++)
     {
         NSNumber *highestDamageCount = [damageCountSumsArray valueForKeyPath:@"@max.intValue"];

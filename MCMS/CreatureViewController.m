@@ -30,6 +30,9 @@
     self.editCreatureDetailTextField.hidden = YES;
     self.editCreatureNameTextField.hidden = YES;
 
+    self.editCreatureDetailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    self.editCreatureNameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+
     self.creatureImageView.image = [self.magicalCreature getCreatureImage];
     self.creatureNameLabel.text = [self.magicalCreature getCreatureName];
     self.creatureDetailLabel.text = [self.magicalCreature getCreatureDetail];
@@ -64,7 +67,8 @@
     return [[self.magicalCreature getCreatureAccessories] count];
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(UITableViewCell *)tableView:(UITableView *)tableView
+        cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.accessoriesTableView dequeueReusableCellWithIdentifier:@"accessoryCellID"];
     CreatureAccessory *accessoryAtCell = [[self.magicalCreature getCreatureAccessories] objectAtIndex:indexPath.row];
