@@ -66,7 +66,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.accesoriesTableView dequeueReusableCellWithIdentifier:@"accessoryCellID"];
-    cell.textLabel.text = [[self.magicalCreature getCreatureAccessories] objectAtIndex:indexPath.row];
+    cell.textLabel.text = [[[self.magicalCreature getCreatureAccessories] objectAtIndex:indexPath.row] name];
     return cell;
 }
 

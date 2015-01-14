@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "MagicalCreature.h"
 #import "CreatureViewController.h"
+#import "CreatureAccessory.h"
 
 @interface ViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *listTableView;
@@ -21,7 +22,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSMutableArray *creatureAccessories = [NSMutableArray arrayWithObjects:@"Spoon", @"Cheese", @"Gold", @"Rubber Duck",  nil];
+
+
+    NSMutableArray *creatureAccessories = [self createCreatureAccessories];
     UIImage *unicornImage = [UIImage imageNamed:@"unicorn"];
     UIImage *griffinImage = [UIImage imageNamed:@"griffin"];
     UIImage *dragonImage = [UIImage imageNamed:@"dragon"];
@@ -47,7 +50,7 @@
 
 - (IBAction)addButtonTapped:(UIButton *)sender
 {
-    NSMutableArray *creatureAccessories = [NSMutableArray arrayWithObjects:@"Spoon", @"Cheese", @"Gold", @"Rubber Duck",  nil];
+    NSMutableArray *creatureAccessories = [self createCreatureAccessories];
     UIImage *creatureImage = [UIImage imageNamed:@"question"];
     MagicalCreature *newCreature = [[MagicalCreature alloc]initWithName:self.creatureNameTextField.text detail:self.creatureDetailTextField.text accessories:creatureAccessories image:creatureImage];
     [self.creatures addObject:newCreature];
@@ -62,6 +65,16 @@
     // Find the index path from the selected table view cell
     // and use that to find the index of the creature in the creature array
     cvc.magicalCreature = [self.creatures objectAtIndex:[[self.listTableView indexPathForCell:cell] row]];
+}
+
+- (NSMutableArray *)createCreatureAccessories {
+    CreatureAccessory *firstAccessory = [[CreatureAccessory alloc] initWithCreatureName:@"Spoon" damageCount:40];
+    CreatureAccessory *thirdAccessory = [[CreatureAccessory alloc] initWithCreatureName:@"Gold" damageCount:67];
+    CreatureAccessory *fourthAccessory = [[CreatureAccessory alloc] initWithCreatureName:@"Rubber Duck" damageCount:18];
+    CreatureAccessory *secondAccessory = [[CreatureAccessory alloc] initWithCreatureName:@"Cheese" damageCount:5];
+
+    NSMutableArray *creatureAccessories = [NSMutableArray arrayWithObjects:firstAccessory, secondAccessory, thirdAccessory, fourthAccessory, nil];
+    return creatureAccessories;
 }
 
 @end

@@ -12,7 +12,7 @@
 
 @property NSString *name;
 @property NSString *detail;
-@property NSMutableArray *accessories;
+@property NSMutableArray *accessoriesArray;
 @property UIImage *image;
 
 @end
@@ -27,7 +27,7 @@
         self.name = name;
         self.detail = detail;
         self.image = image;
-        self.accessories = accessories;
+        self.accessoriesArray = accessories;
     }
     return self;
 }
@@ -49,7 +49,7 @@
 
 -(NSMutableArray *)getCreatureAccessories
 {
-    return self.accessories;
+    return self.accessoriesArray;
 }
 
 -(void)setCreatureName: (NSString *)name
